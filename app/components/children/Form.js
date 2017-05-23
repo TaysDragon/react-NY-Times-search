@@ -12,8 +12,10 @@ var Form = React.createClass({
   // This function will respond to the user input (this is boilerplate, make changes in the render)
   handleChange: function(event) {
   var newState = {};
+  console.log(event.target);
     newState[event.target.id] = event.target.value;
     this.setState(newState);
+    console.log(newState);
   },
 
   // When a user submits...
@@ -53,7 +55,7 @@ var Form = React.createClass({
                 className="form-control text-center"
                 id="term"
                 placeholder="What articles would you like to find?"
-                onChange={this.handleChange.bind(this, 'term')}
+                onChange={this.handleChange}
                 required
               />
               <br />
@@ -67,7 +69,7 @@ var Form = React.createClass({
                 className="form-control text-center"
                 id="startYear"
                 placeholder="1851"
-                onChange={this.handleChange.bind(this, 'startYear')}
+                onChange={this.handleChange}
                 required
               />
               <br />
@@ -82,7 +84,7 @@ var Form = React.createClass({
                 className="form-control text-center"
                 id="endYear"
                 placeholder="2017"
-                onChange={this.handleChange.bind(this, 'endYear')}
+                onChange={this.handleChange}
                 required
               />
               <br />

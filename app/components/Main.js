@@ -28,25 +28,27 @@ var Main = React.createClass({
       }
     }.bind(this));
   },
-
+// This function allows childrens to update the parent.
+  setTerm: function(term, startYear, endYear) {
+    console.log(term, startYear, endYear);
+    // helper.runQuery(this.state.term, this.state.startYear, this.state.endYear).then(function(data) {
+    //   if (data !== this.state.results) {
+    //     this.setState({ term, 
+    //   startYear, 
+    //   endYear});
+    // console.log(this.state.term);
+    //     // console.log("Results", data);
+    //     // this.setState({ results: data });
+    //   }
+    // }.bind(this));
+    
+  },
   // If the component changes (i.e. if a search is entered)...
-  componentDidUpdate: function() {
+  // componentDidUpdate: function() {
 
     // Run the query for the search term, startYear, and endYear 
-    helper.runQuery(this.state.term, this.state.startYear, this.state.endYear).then(function(data) {
-      if (data !== this.state.results) {
-        console.log("Results", data);
-        this.setState({ results: data });
-      }
-    }.bind(this));
-  },
-  // This function allows childrens to update the parent.
-  setTerm: function(term, startYear, endYear) {
-    this.setState({ term: term, 
-      startYear: startYear, 
-      endYear: endYear});
-    console.log(setTerm);
-  },
+    
+  
   // Here we render the function
   //The `style` prop expects a mapping from style properties to values, not a string. For example, style={{marginRight: spacing + 'em'}} when using JSX. This DOM node was rendered by `Main`.
   render: function() {

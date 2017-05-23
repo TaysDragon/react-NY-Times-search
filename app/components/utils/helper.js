@@ -13,13 +13,16 @@ var queryURLBase = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?api
 // Helper functions for making API Calls
 var helper = {
   // This function serves our purpose of running the query to NY Times.
-  runQuery: function(articles, queryURL) {
+  runQuery: function(term, startYear, endYear) {
     console.log(articles);
 
     // Find articles
-    var queryURL = queryURLBase + setTerm.term + "&begin_date=" + setTerm.startYear + "0101&end_date="+ setTerm.endYear +"1231";
+    // var queryURL = queryURLBase + setTerm.term + "&begin_date=" + setTerm.startYear + "0101&end_date="+ setTerm.endYear +"1231";
 
     return axios.get(queryURL).then(function(response) {
+console.log(term, startYear, endYear);
+
+      
       if (response.docs[i].headline.main) {
         return response.docs[i].headline.main;
       }

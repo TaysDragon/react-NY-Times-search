@@ -14,3 +14,9 @@ When you’re ready to connect Mongoose with your remote database, simply paste th
 
 
 https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=b9f91d369ff59547cd47b931d8cbc56b:0:74623931&q=flowers&begin_date=20160101&end_date=20170101
+
+
+Uncaught (in promise) ReferenceError: <functionName> is not defined
+The variable <functionName > doesn't exist inside render
+
+php -f Sharon.php
