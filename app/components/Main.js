@@ -7,21 +7,20 @@ var Results = require("./children/Results");
 var History = require("./children/History");
 
 // Helper for making AJAX requests to our API
-var helpers = require("./utils/helpers");
+var helper = require("./utils/helper");
 
 // Creating the Main component
 var Main = React.createClass({
 
-  // Here we set a generic state associated with the number of clicks
-  // Note how we added in this history state variable
+//InitialState for this specific page, should not be the same as InitialState in Form.js
   getInitialState: function() {
-    return { searchTerm: "", results: "", history: [] };
+    return { setTerm: [], results: [], history: [] };
   },
 
   // The moment the page renders get the History
   componentDidMount: function() {
     // Get the latest history.
-    helpers.getHistory().then(function(response) {
+    helper.getHistory().then(function(response) {
       console.log(response);
       if (response !== this.state.history) {
         console.log("History", response.data);
@@ -33,32 +32,20 @@ var Main = React.createClass({
   // If the component changes (i.e. if a search is entered)...
   componentDidUpdate: function() {
 
-    // Run the query for the address
-    helpers.runQuery(this.state.searchTerm).then(function(data) {
+    // Run the query for the search term, startYear, and endYear 
+    helper.runQuery(this.state.term, this.state.startYear, this.state.endYear).then(function(data) {
       if (data !== this.state.results) {
-        console.log("Address", data);
+        console.log("Results", data);
         this.setState({ results: data });
-
-        // After we've received the result... then post the search term to our history.
-        helpers.postHistory(this.state.searchTerm).then(function() {
-          console.log("Updated!");
-
-          // After we've done the post... then get the updated history
-          helpers.getHistory().then(function(response) {
-            console.log("Current History", response.data);
-
-            console.log("History", response.data);
-
-            this.setState({ history: response.data });
-
-          }.bind(this));
-        }.bind(this));
       }
     }.bind(this));
   },
   // This function allows childrens to update the parent.
-  setTerm: function(term) {
-    this.setState({ searchTerm: term });
+  setTerm: function(term, startYear, endYear) {
+    this.setState({ term: term, 
+      startYear: startYear, 
+      endYear: endYear});
+    console.log(setTerm);
   },
   // Here we render the function
   //The `style` prop expects a mapping from style properties to values, not a string. For example, style={{marginRight: spacing + 'em'}} when using JSX. This DOM node was rendered by `Main`.
@@ -85,15 +72,13 @@ var Main = React.createClass({
 
           </div>
 
-        </div>
-
         <div className="col-sm-12">
 
           <History history={this.state.history} />
 
         </div>
 
-   
+      </div>
       </div>
     );
   }

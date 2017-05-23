@@ -1,5 +1,6 @@
 // Include React
 var React = require("react");
+import helper from '../utils/helper.js';
 
 // Creating the Results component
 var Results = React.createClass({
@@ -11,13 +12,10 @@ var Results = React.createClass({
           <h3 className="panel-title text-center"><strong><i className="fa  fa-list-alt"></i> Top Articles:</strong></h3>
         </div>
         <div className="panel-body text-center">
-
-        //<div class="well" id="article-well-1">
-        <h3 class="articleHeadline">
-<span class="label label-primary">{articleCounter}</span>
-<strong>{Title}</strong></h3>
-<h5>By {author}</h5></div>  
-          <p>{this.props.address}</p>
+        <div className="well" id="article-well-1">      
+  
+           
+        </div>
         </div>
       </div>
     );

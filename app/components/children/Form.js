@@ -6,21 +6,14 @@ var Form = React.createClass({
 
   // Here we set a generic state associated with the text being searched for
   getInitialState: function() {
-    return { term: "",
-    numResults: 5,
-    startYear: "",
-    endYear: ""
-     };
+    return { term: "", startYear: "", endYear: ""};
   },
 
-  // This function will respond to the user input
+  // This function will respond to the user input (this is boilerplate, make changes in the render)
   handleChange: function(event) {
-
-    this.setState({ term: event.target.value,
-  startYear: event.target.value,
-    endYear: event.target.value
-     });
-
+  var newState = {};
+    newState[event.target.id] = event.target.value;
+    this.setState(newState);
   },
 
   // When a user submits...
@@ -30,13 +23,11 @@ var Form = React.createClass({
     event.preventDefault();
 
     // Set the parent to have the search terms
-    this.props.setTerm(this.state.term);
-    this.setState({ term: "" });
-    this.props.setTerm(this.state.startYear);
-    this.setState({ startYear: "" });
-    this.props.setTerm(this.state.endYear);
-    this.setState({ endYear: "" });
-  },
+    this.props.setTerm({
+      term: this.state.term,
+      startYear:this.state.startYear, 
+      endYear:this.state.endYear});
+    },
   // Here we describe this component's render method
   render: function() {
     return (
@@ -60,9 +51,9 @@ var Form = React.createClass({
                 value={this.state.term}
                 type="text"
                 className="form-control text-center"
-                id="search-term"
+                id="term"
                 placeholder="What articles would you like to find?"
-                onChange={this.handleChange}
+                onChange={this.handleChange.bind(this, 'term')}
                 required
               />
               <br />
@@ -74,9 +65,9 @@ var Form = React.createClass({
                 value={this.state.startYear}
                 type="number"
                 className="form-control text-center"
-                id="start-year"
+                id="startYear"
                 placeholder="1851"
-                onChange={this.handleChange}
+                onChange={this.handleChange.bind(this, 'startYear')}
                 required
               />
               <br />
@@ -89,9 +80,9 @@ var Form = React.createClass({
                 value={this.state.endYear}
                 type="number"
                 className="form-control text-center"
-                id="end-year"
+                id="endYear"
                 placeholder="2017"
-                onChange={this.handleChange}
+                onChange={this.handleChange.bind(this, 'endYear')}
                 required
               />
               <br />

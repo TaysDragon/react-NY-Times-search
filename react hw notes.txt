@@ -1,0 +1,49 @@
+postHistory: function(savedArticles) {
+    return axios.post("/api", { title: title,
+      author: author,
+      link: link,
+      notes: notes
+     });
+
+On results page I need:
+title
+authr
+date
+
+When save: save info from that article:
+title
+author
+date 
+link
+note
+
+
+
+on history show:
+title
+author
+date note
+
+Taken out of results.js
+<h3 class="articleHeadline"></h3>
+<span class="label label-primary">{helper.articleCounter}</span>
+<strong>{this.state.title}</strong></h3>
+ <h5>By {this.state.author}</h5></div> 
+
+Cannot read property 'id' of undefined
+
+Adding to history:
+ // When user selects save, then post the article to history.
+        helper.postHistory(this.state.searchTerm).then(function() {
+          console.log("Updated!");
+Taken from form.js under handleChange
+startYear: event.target.value,
+    endYear: event.target.value
+
+
+
+ handleChange: function(event) {
+  var newState = {};
+newState[event.target.id] = event.target.value;
+    this.setState(newState);
+  },
