@@ -59,6 +59,7 @@ var Main = React.createClass({
   // This function allows childrens to update the parent.
   setTerm: function(term) {
     this.setState({ searchTerm: term });
+    console.log("Main.js line 62" + term);
   },
   // Here we render the function
   render: function() {

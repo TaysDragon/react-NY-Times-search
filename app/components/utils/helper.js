@@ -3,24 +3,29 @@ var axios = require("axios");
 import Form from '../Main.js';
 
 // NY Times API
-// var geocodeAPI = "35e5548c618555b1a43eb4759d26b260";
 var authKey = "b9f91d369ff59547cd47b931d8cbc56b:0:74623931";
 
-var queryURLBase = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=' +
-  authKey + "&q=";
+var queryURLBase = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key='+authKey+"&q=";
+
 
 // FUNCTIONS
 // Helper functions for making API Calls
 var helper = {
   // This function serves our purpose of running the query to NY Times.
-  runQuery: function(term, startYear, endYear) {
-    console.log(articles);
+  runQuery: function(search) {
+console.log(term, startYear, endYear);
+
+var formattedTerm = setTerm.term.trim();
+var formattedStart = startYear.trim() + "0101";
+var formattedEnd = endYear.trim() + "1231";
+console.log(formattedTerm, formattedStart, formattedEnd);
 
     // Find articles
-    // var queryURL = queryURLBase + setTerm.term + "&begin_date=" + setTerm.startYear + "0101&end_date="+ setTerm.endYear +"1231";
+  var queryURL = queryURLBase + formattedTerm + "&begin_date=" + formattedStart + "&end_date="+ formattedEnd;
+ console.log(queryURL);
 
     return axios.get(queryURL).then(function(response) {
-console.log(term, startYear, endYear);
+
 
       
       if (response.docs[i].headline.main) {
