@@ -6,7 +6,7 @@ var Form = React.createClass({
 
   // Here we set a generic state associated with the text being searched for
   getInitialState: function() {
-    return { setTerm: "", startYear: "", endYear: ""};
+    return { term: "", startYear: "", endYear: ""};
   },
 
   // This function will respond to the user input (this is boilerplate, make changes in the render)
@@ -15,7 +15,7 @@ var Form = React.createClass({
   // http://stackoverflow.com/questions/21029999/react-js-identifying-different-inputs-with-one-onchange-handler
     newState[event.target.id] = event.target.value;
     this.setState(newState);
-    console.log(newState);
+    console.log("form 18 newState"+newState);
     console.log("Form 19 event" + event.target.id + event.target.value);
   },
 
@@ -26,8 +26,9 @@ var Form = React.createClass({
     event.preventDefault();
 
     // Set the parent to have the search terms
-      this.props.setTerm(this.state.term, this.state.startYear, this.state.endYear);
-    console.log("form 30"+setTerm)
+      this.props.setTerm({term: this.state.term, startYear:this.state.startYear, endYear: this.state.endYear});
+      this.setState({ term: "" });
+    console.log("form 30"+term);
     },
   // Here we describe this component's render method
   render: function() {

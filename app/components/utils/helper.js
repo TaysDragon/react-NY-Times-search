@@ -13,32 +13,44 @@ var queryURLBase = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?api
 var helper = {
   // This function serves our purpose of running the query to NY Times.
   runQuery: function(search) {
-console.log(term, startYear, endYear);
+// console.log("helper 16" + term+ startYear+ endYear);
 
-var formattedTerm = setTerm.term.trim();
-var formattedStart = startYear.trim() + "0101";
-var formattedEnd = endYear.trim() + "1231";
-console.log(formattedTerm, formattedStart, formattedEnd);
+var formattedTerm = search.term.trim();
+var formattedStart = search.startYear.trim() + "0101";
+var formattedEnd = search.endYear.trim() + "1231";
+console.log("helper 21"+formattedTerm+ formattedStart+ formattedEnd);
 
     // Find articles
   var queryURL = queryURLBase + formattedTerm + "&begin_date=" + formattedStart + "&end_date="+ formattedEnd;
- console.log(queryURL);
+ console.log("helper 25"+queryURL);
 
-    return axios.get(queryURL).then(function(response) {
+        return axios.get(queryURL).then(function(response){
+            if(response.data.response.docs){
+                var results = [];
+                for(var i=0; i<5; i++){
+                    results.push(response.data.response.docs[i])
+                };
 
+                return results;
+
+            }
+            // If we don't get any results, return an empty string
+                return "Sorry, no results were returned.";
+        });
+       // Log the first article's headline to console
+        console.log(results); 
+    },
 
       
-      if (response.docs[i].headline.main) {
-        return response.docs[i].headline.main;
-      }
-      // If we don't get any results, return an empty string
-      return "Sorry, no results were returned.";
+      
 
-      // Log the first article's headline to console
-        console.log(response.docs[i].headline.main);
-      });
-  },
-
+postArticles: function(result){
+        return axios.post("/api", {
+            title: result.headline.main,
+            author: result.byline.original,
+            link: result.web_url
+        });
+    },
   // This function hits our own server to retrieve the record of query results
   getHistory: function() {
     return axios.get("/api");
